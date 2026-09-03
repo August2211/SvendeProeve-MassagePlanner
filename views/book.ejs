@@ -1,0 +1,17 @@
+<form method="POST" action="/book">
+    <input type="text" name="customer_name" placeholder="Navn" required>
+
+    <input type="email" name="customer_email" placeholder="Email" required>
+
+    <select name="treatment_id" required>
+        <% treatments.forEach(treatment => { %>
+            <option value="<%= treatment.id %>">
+                <%= treatment.name %>
+            </option>
+        <% }); %>
+    </select>
+
+    <input type="datetime-local" name="start_time" required>
+
+    <button type="submit">Book</button>
+</form>

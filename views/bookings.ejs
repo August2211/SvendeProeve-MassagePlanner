@@ -1,0 +1,13 @@
+<p>Bookings:</p>
+<br>
+
+<% bookings.forEach(booking => { %>
+    <% console.log(booking); %>
+    <p>Customer name: <%= booking.customer_name %></p>
+    <p>Customer email: <%= booking.customer_email %></p>
+    <p>Start time: <%= booking.start_time %></p>
+    <p>Status: <%= booking.status %></p>
+    <p>Name: <%= booking.name %></p>
+    <p>Duration (minutes): <%= booking.duration_minutes %></p>
+    <br>
+<% }); %>

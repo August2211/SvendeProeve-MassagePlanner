@@ -1,1 +1,11 @@
-<p>Treatments</p>
+<p>Treatments:</p>
+<br>
+
+<% treatments.forEach(treatment => { %>
+    <% console.log(treatment); %>
+        <p><%= treatment.name %></p>
+        <p><%= treatment.price %></p>
+        <p><%= treatment.duration_minutes %></p>
+        <br>
+    <br>
+<% }); %>

@@ -4,6 +4,8 @@ const express = require("express");
 const InitSchemas = require("./db/schema.js");
 const homeRoutes = require("./routes/homeRoutes.js");
 const treatmentRoutes = require("./routes/treatmentRoutes.js");
+const bookingRoutes = require('./routes/bookingsRoutes.js')
+const bookRoutes = require('./routes/bookRoutes.js')
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.set("view engine", "ejs");
 
 app.use("/", homeRoutes);
 app.use("/treatments", treatmentRoutes);
+app.use("/bookings", bookingRoutes);
+app.use("/book", bookRoutes);
 
 async function StartApplication() {
     try {
