@@ -3,6 +3,6 @@ const treatmentController = require("../controllers/treatmentController.js");
 
 const router = express.Router();
 
-router.get("/", treatmentController.showTreatments);
+router.get("/", treatmentController.getTreatments);
 
 module.exports = router;

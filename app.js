@@ -6,6 +6,8 @@ const homeRoutes = require("./routes/homeRoutes.js");
 const treatmentRoutes = require("./routes/treatmentRoutes.js");
 const bookingRoutes = require('./routes/bookingsRoutes.js')
 const bookRoutes = require('./routes/bookRoutes.js')
+const availabilityRoutes = require('./routes/availabilityRoutes.js')
+const adminRoutes = require('./routes/adminRoutes.js')
 
 const app = express();
 
@@ -20,6 +22,8 @@ app.use("/", homeRoutes);
 app.use("/treatments", treatmentRoutes);
 app.use("/bookings", bookingRoutes);
 app.use("/book", bookRoutes);
+app.use("/availability", availabilityRoutes);
+app.use("/admin", adminRoutes);
 
 async function StartApplication() {
     try {

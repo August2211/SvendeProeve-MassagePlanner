@@ -1,0 +1,9 @@
+<p>Availability:</p>
+<br>
+
+<% availability.forEach(available => { %>
+    <% console.log(available); %>
+    <p>Start time: <%= available.start_time %></p>
+    <p>End time: <%= available.end_time %></p>
+    <br>
+<% }); %>

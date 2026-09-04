@@ -1,7 +1,7 @@
-function showIndex(req, res) {
-    res.render("index");
+function getIndex(req, res) {
+    res.status(200).render("index");
 }
 
 module.exports = {
-    showIndex
+    getIndex
 };

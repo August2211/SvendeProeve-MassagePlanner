@@ -1,19 +1,15 @@
-const DB = require("../db/database");
+const BookingService = require("../services/bookingService");
 
-async function showBookings(req, res) {
-    try {
-        const [rows] = await DB.execute(`SELECT bookings.customer_name, bookings.customer_email, bookings.start_time, bookings.status, treatments.name, treatments.duration_minutes
-            FROM bookings
-            INNER JOIN treatments ON bookings.treatment_id = treatments.id;`);
+async function getBookings(req, res) {
 
-        res.render("bookings", { bookings: rows });
+    const bookings = await BookingService.getBookings();
+    if(bookings == null) {
+        return res.status(500).send("Internal server error");
     }
-    catch (error) {
-        res.status(500).send("Internal server error");
-        console.error(`Error fetching bookings: ${error}`);
-    }
+
+    res.status(200).render("bookings", { bookings: bookings });
 }
 
 module.exports = {
-    showBookings
+    getBookings
 };

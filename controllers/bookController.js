@@ -1,10 +1,12 @@
-const DB = require("../db/database");
+const BookingService = require("../services/bookingService");
+const TreatmentService = require("../services/treatmentService");
 
-async function showBookForm(req, res) {
+
+async function getBookForm(req, res) {
     try {
-        const [rows] = await DB.execute(`SELECT id, name, price, duration_minutes FROM treatments;`);
+        const treatments = await TreatmentService.getTreatments();
 
-        res.render("book", { treatments: rows });
+        res.status(200).render("book", { treatments: treatments });
     }
     catch (error) {
         res.status(500).send("Internal server error");
@@ -12,23 +14,16 @@ async function showBookForm(req, res) {
     }
 }
 
-async function createBooking(req, res) {
-    try {
-        const [rows] = await DB.execute(`INSERT INTO bookings (customer_name, customer_email, treatment_id, start_time) VALUES (?, ?, ?, ?);`,
-            [
-                req.body.customer_name, req.body.customer_email, req.body.treatment_id, req.body.start_time
-            ]
-        );
+async function postBooking(req, res) {
+    const created = BookingService.createBooking(req.body);
+    if(created == null) {
+        return res.status(500).send("Internal server error");
+    }
 
-        res.status(200).send("Created booking successfully!");
-    }
-    catch (error) {
-        res.status(500).send("Internal server error");
-        console.error(`Error creating booking: ${error}`);
-    }
+    res.status(200).render("bookingConfirmation", { booking: req.body });
 }
 
 module.exports = {
-    createBooking,
-    showBookForm
+    postBooking,
+    getBookForm
 };

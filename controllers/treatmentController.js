@@ -1,10 +1,10 @@
-const DB = require("../db/database");
+const TreatmentService = require("../services/treatmentService");
 
-async function showTreatments(req, res) {
+async function getTreatments(req, res) {
     try {
-        const [rows] = await DB.execute(`SELECT name, price, duration_minutes FROM treatments;`);
+        const treatments = await TreatmentService.getTreatments();
 
-        res.render("treatments", { treatments: rows });
+        res.status(200).render("treatments", { treatments: treatments });
     }
     catch (error) {
         res.status(500).send("Internal server error");
@@ -13,5 +13,5 @@ async function showTreatments(req, res) {
 }
 
 module.exports = {
-    showTreatments
+    getTreatments
 };
