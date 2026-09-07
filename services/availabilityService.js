@@ -14,7 +14,7 @@ async function getAvailabilities() {
 
 async function createAvailability(data) {
     try {
-        if (new Date(data.start_time) >= new Date(data.end_time)) {
+        if (new Date(data.start_time).getTime() >= new Date(data.end_time).getTime()) {
             return null;
         }
 

@@ -1,17 +1,41 @@
-<form method="POST" action="/book">
-    <input type="text" name="customer_name" placeholder="Navn" required>
+<h1>Book behandling</h1>
 
-    <input type="email" name="customer_email" placeholder="Email" required>
+<label for="treatment">Behandling:</label>
 
-    <select name="treatment_id" required>
-        <% treatments.forEach(treatment => { %>
-            <option value="<%= treatment.id %>">
-                <%= treatment.name %>
-            </option>
+<select id="treatment" onchange="window.location.href = '/book?treatment_id=' + this.value">
+    <option value="">Vælg behandling</option>
+
+    <% treatments.forEach(treatment=> { %>
+        <option value="<%= treatment.id %>" <%=selectedTreatment && selectedTreatment.id == treatment.id ? "selected" : "" %>>
+            <%= treatment.name %>
+        </option>
         <% }); %>
-    </select>
+</select>
 
-    <input type="datetime-local" name="start_time" required>
 
-    <button type="submit">Book</button>
-</form>
+<% if (selectedTreatment) { %>
+    <p>
+        <%= selectedTreatment.name %> -
+        <%= selectedTreatment.duration_minutes %> minutter
+    </p>
+
+    <form method="POST" action="/book">
+        <input type="hidden" name="treatment_id" value="<%= selectedTreatment.id %>">
+        <input type="text" name="customer_name" placeholder="Navn" required>
+        <input type="email" name="customer_email" placeholder="Email" required>
+
+        <% if (availableTimes.length > 0) { %>
+            <select name="start_time" required>
+                <% availableTimes.forEach(time=> { %>
+                    <option value="<%= time %>">
+                        <%= time.toLocaleString() %>
+                    </option>
+                    <% }); %>
+            </select>
+        <% } else { %>
+            <p> No bookings available! </p>
+        <% } %>
+
+        <button type="submit">Book</button>
+    </form>
+    <% } %>
