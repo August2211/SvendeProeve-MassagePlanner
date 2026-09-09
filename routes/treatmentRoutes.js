@@ -1,8 +1,8 @@
 const express = require("express");
-const treatmentController = require("../controllers/treatmentController.js");
+const TreatmentController = require("../controllers/treatmentController.js");
 
 const router = express.Router();
 
-router.get("/", treatmentController.getTreatments);
+router.get("/", TreatmentController.getTreatments);
 
 module.exports = router;

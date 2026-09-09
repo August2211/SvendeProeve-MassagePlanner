@@ -1,8 +1,8 @@
 const express = require("express");
-const availabilityController = require("../controllers/availabilityController.js");
+const AvailabilityController = require("../controllers/availabilityController.js");
 
 const router = express.Router();
 
-router.get("/", availabilityController.getAvailability);
+router.get("/", AvailabilityController.getAvailability);
 
 module.exports = router;

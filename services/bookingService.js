@@ -37,8 +37,7 @@ async function getAvailableTimes(treatment_id) {
         const [bookingRows] = await DB.execute(`SELECT bookings.start_time, treatments.duration_minutes
             FROM bookings
             INNER JOIN treatments ON bookings.treatment_id = treatments.id
-            WHERE bookings.status = 'active'
-            ;`);
+            WHERE bookings.status = 'active';`);
 
         const [treatmentRows] = await DB.execute(`SELECT treatments.duration_minutes
             FROM treatments

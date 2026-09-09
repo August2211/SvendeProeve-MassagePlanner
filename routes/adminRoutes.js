@@ -1,12 +1,12 @@
 const express = require("express");
-const availabilityController = require("../controllers/availabilityController.js");
-const bookingsController = require("../controllers/bookingsController.js");
+const AvailabilityController = require("../controllers/availabilityController.js");
+const BookingsController = require("../controllers/bookingsController.js");
 
 const router = express.Router();
 
-router.get("/availability", availabilityController.getAdminAvailability);
-router.post("/availability", availabilityController.postAvailability);
+router.get("/availability", AvailabilityController.getAdminAvailability);
+router.post("/availability", AvailabilityController.postAvailability);
 
-router.get("/bookings", bookingsController.getBookings);
+router.get("/bookings", BookingsController.getBookings);
 
 module.exports = router;

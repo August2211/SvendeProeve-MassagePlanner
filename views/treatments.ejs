@@ -1,11 +1,22 @@
-<p>Treatments:</p>
-<br>
+<%- include("share/header") %>
+<%- include("share/navbar") %>
 
-<% treatments.forEach(treatment => { %>
-    <% console.log(treatment); %>
-        <p><%= treatment.name %></p>
-        <p><%= treatment.price %></p>
-        <p><%= treatment.duration_minutes %></p>
-        <br>
-    <br>
-<% }); %>
+<div class="treatment-list">
+    <% treatments.forEach(treatment => { %>
+        <div class="treatment-card">
+            <div>
+                <h2><%= treatment.name %></h2>
+                <p>
+                    <%= treatment.duration_minutes %> minutter ·
+                    <%= treatment.price %> kr.
+                </p>
+            </div>
+
+            <a class="button" href="/book?treatment_id=<%= treatment.id %>">
+                Book tid
+            </a>
+        </div>
+    <% }); %>
+</div>
+
+<%- include("share/footer") %>

@@ -1,7 +1,21 @@
-<p>Booking gennemført</p>
-<br>
+<%- include("share/header") %>
+<%- include("share/navbar") %>
 
-<p>Navn: <%= booking.customer_name %></p>
-<p>Email: <%= booking.customer_email %></p>
-<p>Treatment ID: <%= booking.treatment_id %></p>
-<p>Start tid: <%= booking.start_time.toLocaleString() %></p>
+<div class="confirmation">
+    <h1>Booking gennemført</h1>
+    <p>Din tid er blevet booket.</p>
+
+    <div class="confirmation-details">
+        <p><strong>Navn:</strong> <%= booking.customer_name %></p>
+        <p><strong>Email:</strong> <%= booking.customer_email %></p>
+        <p><strong>Behandling:</strong> <%= treatment_name %></p>
+        <p>
+            <strong>Starttid:</strong>
+            <%= booking.start_time.toLocaleString() %>
+        </p>
+    </div>
+
+    <a class="button" href="/">Tilbage til forsiden</a>
+</div>
+
+<%- include("share/footer") %>
