@@ -5,12 +5,15 @@ const TreatmentService = require("../services/treatmentService");
 async function getBookForm(req, res) {
     try {
         const treatments = await TreatmentService.getTreatments();
-        const availableTimes = await BookingService.getAvailableTimes(req.query.treatment_id);
+        let availableTimes = null;
+        if(req.query.treatment_id != null) {
+            availableTimes = await BookingService.getAvailableTimes(req.query.treatment_id);
+        }
 
         const selectedTreatment = treatments.find(treatment =>
             treatment.id == req.query.treatment_id
         );
-
+        
         res.status(200).render("book", { treatments: treatments, availableTimes: availableTimes, selectedTreatment: selectedTreatment });
     }
     catch (error) {

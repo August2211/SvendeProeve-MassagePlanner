@@ -48,6 +48,38 @@ body {
     margin: 0;
 }
 
+.treatment-info {
+    padding: 15px;
+    border: 1px solid #ddd;
+}
+
+.treatment-form {
+    max-width: 500px;
+    margin-bottom: 40px;
+}
+
+.admin-treatment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.admin-treatment-card {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+.admin-treatment-card h3 {
+    margin: 0 0 8px 0;
+}
+
+.admin-treatment-card p {
+    margin: 5px 0;
+}
+
 .button {
     padding: 10px;
     text-decoration: none;
@@ -66,6 +98,24 @@ body {
     max-width: 500px;
 }
 
+.bookings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.booking-card {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+.booking-card p {
+    margin: 5px 0;
+}
+
 .form-group {
     display: flex;
     flex-direction: column;
@@ -82,15 +132,9 @@ body {
     font-size: 1rem;
 }
 
-.treatment-info {
-    padding: 15px;
-    border: 1px solid #ddd;
-}
-
 .confirmation {
     max-width: 500px;
     border: 1px solid #ddd;
-    border-radius: 8px;
     padding: 25px;
 }
 
@@ -113,4 +157,38 @@ body {
 .error-message {
     margin-bottom: 15px;
     color: #b00020;
+}
+
+.availability-form {
+    max-width: 500px;
+    margin-bottom: 40px;
+}
+
+.availability-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.availability-card {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+.availability-card p {
+    margin: 5px 0;
+}
+
+.admin-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-actions form {
+    margin: 0;
 }

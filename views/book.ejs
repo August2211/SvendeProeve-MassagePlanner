@@ -7,8 +7,7 @@
     <div class="form-group">
         <label for="treatment">Behandling</label>
 
-        <select id="treatment"
-            onchange="window.location.href = '/book?treatment_id=' + this.value">
+        <select id="treatment">
 
             <option value="">Vælg behandling</option>
 
@@ -41,7 +40,7 @@
                 <input id="customer_email" type="email" name="customer_email" required>
             </div>
 
-            <% if (availableTimes.length > 0) { %>
+            <% if (availableTimes && availableTimes.length > 0) { %>
 
                 <div class="form-group">
                     <label for="start_time">Ledig tid</label>
@@ -66,5 +65,7 @@
 
     <% } %>
 </div>
+
+<script src="/js/book.js"></script>
 
 <%- include("share/footer") %>

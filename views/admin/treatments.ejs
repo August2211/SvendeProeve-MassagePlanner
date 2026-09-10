@@ -1,0 +1,51 @@
+<%- include("../share/header") %>
+<%- include("../share/navbar") %>
+
+<div class="treatment-form">
+    <h1>Administrer behandlinger</h1>
+
+    <h2>Opret behandling</h2>
+
+    <form method="POST" action="/admin/treatments">
+        <div class="form-group">
+            <label for="name">Navn</label>
+            <input id="name" type="text" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Pris</label>
+            <input id="price" type="number" name="price" min="0" step="0.01" required>
+        </div>
+
+        <div class="form-group">
+            <label for="duration_minutes">Varighed i minutter</label>
+            <input id="duration_minutes" type="number" name="duration_minutes" min="1" required>
+        </div>
+
+        <button class="button" type="submit">Opret</button>
+    </form>
+</div>
+
+<div class="admin-treatment-list">
+    <h2>Behandlinger</h2>
+
+    <% treatments.forEach(treatment => { %>
+        <div class="admin-treatment-card">
+            <div>
+                <h3><%= treatment.name %></h3>
+                <p>Pris: <%= treatment.price %> kr.</p>
+                <p>Varighed: <%= treatment.duration_minutes %> minutter</p>
+            </div>
+
+            <div class="admin-actions">
+                <a class="button" href="/admin/treatments/<%= treatment.id %>/edit">Rediger</a>
+
+                <form method="POST" action="/admin/treatments/<%= treatment.id %>/delete">
+                    <button class="button" type="submit">Slet</button>
+                </form>
+            </div>
+        </div>
+    <% }); %>
+</div>
+
+<%- include("../share/footer") %>

@@ -12,6 +12,45 @@ async function getTreatments() {
     }
 }
 
+async function createTreatment(data) {
+    try {
+        const created = await DB.execute(`INSERT INTO treatments (name, price, duration_minutes) VALUES (?, ?, ?);`, [data.name, data.price, data.duration_minutes]);
+
+        return created;
+    }
+    catch (error) {
+        console.error(`Error creating treatment: ${error}`);
+        return null;
+    }
+}
+
+async function editTreatment(data) {
+    try {
+        const edited = await DB.execute(`UPDATE treatments SET name = ?, price = ?, duration_minutes = ? WHERE id = ?;`, [data.name, data.price, data.duration_minutes, data.id]);
+
+        return edited;
+    }
+    catch (error) {
+        console.error(`Error creating treatment: ${error}`);
+        return null;
+    }
+}
+
+async function deleteTreatment(data) {
+    try {
+        const deleted = await DB.execute(`DELETE FROM treatments WHERE id = ?;`, [data.id]);
+
+        return deleted;
+    }
+    catch (error) {
+        console.error(`Error creating treatment: ${error}`);
+        return null;
+    }
+}
+
 module.exports = {
-    getTreatments
+    getTreatments,
+    createTreatment,
+    editTreatment,
+    deleteTreatment
 };

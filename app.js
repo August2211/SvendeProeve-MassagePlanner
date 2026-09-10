@@ -3,6 +3,7 @@ process.loadEnvFile("./.env");
 const express = require("express");
 const InitSchemas = require("./db/schema.js");
 const session = require("express-session");
+const helmet = require("helmet");
 
 const requireAuth = require("./middleware/requireAuth");
 
@@ -32,6 +33,8 @@ app.use(session({
 }));
 
 const LISTEN_PORT = Number(process.env.PORT) || 3000;
+
+app.use(helmet());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));

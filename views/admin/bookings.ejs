@@ -1,0 +1,26 @@
+<%- include("../share/header") %>
+<%- include("../share/navbar") %>
+
+<div class="bookings-list">
+    <h1>Administrer bookinger</h1>
+
+    <% bookings.forEach(booking => { %>
+        <div class="booking-card">
+            <p><strong>Navn:</strong> <%= booking.customer_name %></p>
+            <p><strong>Email:</strong> <%= booking.customer_email %></p>
+            <p><strong>Behandling:</strong> <%= booking.treatment_name %></p>
+            <p><strong>Tid:</strong> <%= booking.start_time.toLocaleString("da-DK") %></p>
+            <p><strong>Status:</strong> <%= booking.status == "active" ? "Aktiv" : "Annulleret" %></p>
+
+            <div class="admin-actions">
+                <a class="button" href="/admin/bookings/<%= booking.id %>/edit">Rediger</a>
+
+                <form method="POST" action="/admin/bookings/<%= booking.id %>/delete">
+                    <button class="button" type="submit">Slet</button>
+                </form>
+            </div>
+        </div>
+    <% }); %>
+</div>
+
+<%- include("../share/footer") %>

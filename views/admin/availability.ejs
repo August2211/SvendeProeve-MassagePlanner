@@ -1,16 +1,52 @@
-<p>Admin availability:</p>
-<br>
+<%- include("../share/header") %>
+<%- include("../share/navbar") %>
 
-<% availability.forEach(available => { %>
-    <% console.log(available); %>
-    <p>Start time: <%= available.start_time %></p>
-    <p>End time: <%= available.end_time %></p>
-    <br>
-<% }); %>
+<h1>Administrer ledige tider</h1>
 
-<form method="POST" action="/admin/availability">
-    <input type="datetime-local" name="start_time" required>
-    <input type="datetime-local" name="end_time" required>
+<h2>Opret ledig tid</h2>
 
-    <button type="submit">Create</button>
+<form method="POST" action="/admin/availability" class="availability-form">
+    <div class="form-group">
+        <label for="start_time">Starttid</label>
+        <input id="start_time" type="datetime-local" name="start_time" required>
+    </div>
+
+    <div class="form-group">
+        <label for="end_time">Sluttid</label>
+        <input id="end_time" type="datetime-local" name="end_time" required>
+    </div>
+
+    <button class="button" type="submit">Opret</button>
 </form>
+
+<h2>Ledige tider</h2>
+
+<div class="availability-list">
+    <% availability.forEach(available => { %>
+        <div class="availability-card">
+            <div>
+                <p>
+                    <strong>Start:</strong>
+                    <%= available.start_time.toLocaleString() %>
+                </p>
+
+                <p>
+                    <strong>Slut:</strong>
+                    <%= available.end_time.toLocaleString() %>
+                </p>
+            </div>
+
+            <div class="admin-actions">
+                <a class="button" href="/admin/availability/<%= available.id %>/edit">
+                    Rediger
+                </a>
+
+                <form method="POST" action="/admin/availability/<%= available.id %>/delete">
+                    <button class="button" type="submit">Slet</button>
+                </form>
+            </div>
+        </div>
+    <% }); %>
+</div>
+
+<%- include("../share/footer") %>

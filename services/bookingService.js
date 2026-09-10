@@ -2,7 +2,7 @@ const DB = require("../db/database");
 
 async function getBookings() {
     try {
-        const [rows] = await DB.execute(`SELECT bookings.customer_name, bookings.customer_email, bookings.start_time, bookings.status, treatments.name, treatments.duration_minutes
+        const [rows] = await DB.execute(`SELECT bookings.id, bookings.customer_name, bookings.customer_email, bookings.start_time, bookings.status, treatments.id AS treatment_id, treatments.name AS treatment_name, treatments.duration_minutes
         FROM bookings
         INNER JOIN treatments ON bookings.treatment_id = treatments.id;`);
 
@@ -77,8 +77,32 @@ async function getAvailableTimes(treatment_id) {
     }
 }
 
+async function editBooking(data) {
+    try {
+        const result = await DB.execute(`UPDATE bookings SET customer_name = ?, customer_email = ?, treatment_id = ?, start_time = ?, status = ? WHERE id = ?;`, [data.customer_name, data.customer_email, data.treatment_id, data.start_time, data.status, data.id]);
+        return result;
+    }
+    catch (error) {
+        console.error(`Error updating booking: ${error}`);
+        return null;
+    }
+}
+
+async function deleteBooking(data) {
+    try {
+        const result = await DB.execute(`DELETE FROM bookings WHERE id = ?;`, [data.id]);
+        return result;
+    }
+    catch (error) {
+        console.error(`Error deleting booking: ${error}`);
+        return null;
+    }
+}
+
 module.exports = {
     createBooking,
     getBookings,
-    getAvailableTimes
+    getAvailableTimes,
+    editBooking,
+    deleteBooking
 };

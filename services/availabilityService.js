@@ -2,7 +2,7 @@ const DB = require("../db/database");
 
 async function getAvailabilities() {
     try {
-        const [rows] = await DB.execute(`SELECT start_time, end_time FROM availability;`);
+        const [rows] = await DB.execute(`SELECT id, start_time, end_time FROM availability;`);
 
         return rows;
     }
@@ -32,7 +32,41 @@ async function createAvailability(data) {
     }
 }
 
+async function editAvailability(data) {
+    try {
+        const result = await DB.execute(`UPDATE availability SET start_time = ?, end_time = ? WHERE id = ?;`,
+            [
+                data.start_time, data.end_time, data.id
+            ]
+        );
+
+        return result;
+    }
+    catch (error) {
+        console.error(`Error editing availability: ${error}`);
+        return null;
+    }
+}
+
+async function deleteAvailability(data) {
+    try {
+        const result = await DB.execute(`DELETE FROM availability WHERE id = ?;`,
+            [
+                data.id
+            ]
+        );
+
+        return result;
+    }
+    catch (error) {
+        console.error(`Error deleting availability: ${error}`);
+        return null;
+    }
+}
+
 module.exports = {
     createAvailability,
-    getAvailabilities
+    getAvailabilities,
+    editAvailability,
+    deleteAvailability
 };

@@ -1,0 +1,30 @@
+<%- include("../share/header") %>
+<%- include("../share/navbar") %>
+
+<div class="availability-form">
+    <h1>Rediger ledig tid</h1>
+
+    <form method="POST" action="/admin/availability/<%= availability.id %>/edit">
+        <div class="form-group">
+            <label for="start_time">Starttid</label>
+
+            <input id="start_time" type="datetime-local" name="start_time" value="<%= start_time_value %>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="end_time">Sluttid</label>
+
+            <input id="end_time" type="datetime-local" name="end_time" value="<%= end_time_value %>" required>
+        </div>
+
+        <button class="button" type="submit">
+            Gem ændringer
+        </button>
+
+        <a class="button" href="/admin/availability">
+            Annuller
+        </a>
+    </form>
+</div>
+
+<%- include("../share/footer") %>

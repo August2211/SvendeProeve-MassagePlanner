@@ -1,0 +1,47 @@
+<%- include("../share/header") %>
+<%- include("../share/navbar") %>
+
+<div class="booking-form">
+    <h1>Rediger booking</h1>
+
+    <form method="POST" action="/admin/bookings/<%= booking.id %>/edit">
+        <div class="form-group">
+            <label for="customer_name">Navn</label>
+            <input id="customer_name" type="text" name="customer_name" value="<%= booking.customer_name %>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="customer_email">Email</label>
+            <input id="customer_email" type="email" name="customer_email" value="<%= booking.customer_email %>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="treatment_id">Behandling</label>
+            <select id="treatment_id" name="treatment_id" required>
+                <% treatments.forEach(treatment => { %>
+                    <option value="<%= treatment.id %>" <%= treatment.id == booking.treatment_id ? "selected" : "" %>>
+                        <%= treatment.name %>
+                    </option>
+                <% }); %>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="start_time">Starttid</label>
+            <input id="start_time" type="datetime-local" name="start_time" value="<%= start_time_value %>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" name="status" required>
+                <option value="active" <%= booking.status == "active" ? "selected" : "" %>>Aktiv</option>
+                <option value="cancelled" <%= booking.status == "cancelled" ? "selected" : "" %>>Annulleret</option>
+            </select>
+        </div>
+
+        <button class="button" type="submit">Gem ændringer</button>
+        <a class="button" href="/admin/bookings">Annuller</a>
+    </form>
+</div>
+
+<%- include("../share/footer") %>
