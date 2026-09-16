@@ -18,6 +18,7 @@ const AuthRoutes = require('./routes/authRoutes.js')
 
 const app = express();
 
+app.set("trust proxy", "loopback");
 app.use(session({
     name: "massageplanner.sid",
     secret: process.env.SESSION_SECRET,
