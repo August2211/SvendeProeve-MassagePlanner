@@ -40,6 +40,11 @@ app.use(helmet());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+app.use((req, res, next) => {
+    res.locals.loggedIn = req.session.userId;
+    next();
+});
+
 app.set("view engine", "ejs");
 
 app.use("/", HomeRoutes);

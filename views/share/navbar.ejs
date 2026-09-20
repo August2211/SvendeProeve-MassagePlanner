@@ -6,6 +6,16 @@
             <a href="/">Forside</a>
             <a href="/treatments">Behandlinger</a>
             <a href="/book">Book tid</a>
+
+            <div class="auth-links">
+                <% if (loggedIn) { %>
+                    <a href="/admin/availability">Rediger tider</a>
+                    <a href="/admin/bookings">Rediger bookinger</a>
+                    <a href="/admin/treatments">Rediger behandlinger</a>
+                <% } else { %>
+                    <a href="/auth/login">Log ind som administrator</a>
+                <% } %>
+            </div>
         </div>
     </nav>
 </header>

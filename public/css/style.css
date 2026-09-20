@@ -192,3 +192,18 @@ body {
 .admin-actions form {
     margin: 0;
 }
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+    color: blue;
+}
+
+.auth-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-left: auto;
+}
