@@ -8,7 +8,7 @@ async function postLogin(req, res) {
     const userId = await AuthService.postLogin(req.body);
 
     if (userId == null) {
-        return res.status(500).send("Internal server error");
+        return res.status(401).send("Invalid username or password");
     }
 
     return req.session.regenerate(error => {

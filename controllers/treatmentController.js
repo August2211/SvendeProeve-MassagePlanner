@@ -4,6 +4,12 @@ async function getTreatments(req, res) {
     try {
         const treatments = await TreatmentService.getTreatments();
 
+        if(treatments == null)
+        {
+            res.status(500).send("Internal server error");
+            return;
+        }
+        
         res.status(200).render("treatments", { treatments: treatments });
     }
     catch (error) {

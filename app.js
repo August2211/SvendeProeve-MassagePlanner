@@ -1,7 +1,4 @@
-process.loadEnvFile("./.env");
-
 const express = require("express");
-const InitSchemas = require("./db/schema.js");
 const session = require("express-session");
 const helmet = require("helmet");
 
@@ -33,8 +30,6 @@ app.use(session({
     }
 }));
 
-const LISTEN_PORT = Number(process.env.PORT) || 3000;
-
 app.use(helmet());
 
 app.use(express.urlencoded({ extended: true }));
@@ -55,19 +50,4 @@ app.use("/availability", AvailabilityRoutes);
 app.use("/admin", requireAuth, AdminRoutes);
 app.use("/auth", AuthRoutes);
 
-async function StartApplication() {
-    try {
-        await InitSchemas();
-
-        app.listen(LISTEN_PORT, () => {
-            console.log(`Server running on http://localhost:${LISTEN_PORT}`);
-        });
-    }
-    catch (error) {
-        console.error("Failed to start Massage Planner:");
-        console.error(error);
-        process.exit(1);
-    }
-}
-
-StartApplication();
+module.exports = app;
